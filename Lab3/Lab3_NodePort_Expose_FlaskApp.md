@@ -87,7 +87,7 @@ Make sure to keep the above terminal running
 Open a new terminal and now run curl command to test the service:
 
 ```
-curl http://localhost:8080
+curl http://localhost:8888
 ```
 
 ---
@@ -106,11 +106,10 @@ kubectl delete rs flask-replicaset
 In this lab, you:
 
 - Exposed your Flask app using a NodePort on port 30000
-- Retrieved Minikube IP to access the service externally
 - Used `kubectl port-forward` for local access
-- Verified that the application is accessible via browser
+- Verified that the application is accessible via service
 
 ---
 
-🎉 **Congratulations**, your service is now exposed and accessible!  
+🎉 **Congratulations**, you have completed this lab
 ✨ **END OF LAB** ✨
