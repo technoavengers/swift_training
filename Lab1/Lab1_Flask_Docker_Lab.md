@@ -134,6 +134,15 @@ Replace the EC2-Address that you have recieved in last command in below URL
   👉 `http://<your-ec2-public-ip>:5000`
 
 
+## ☘️ Step 10: Cleanup
+🧹 Stop and Remove the Container
+
+```bash
+docker stop flask-demo
+docker rm flask-demo
+```
+
+
 ## ✅ Conclusion
 
 In this lab, you:
