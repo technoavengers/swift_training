@@ -29,13 +29,11 @@ In this lab, you will:
 Navigate to the `Lab1` directory. You will find the following files already present:
 
 - `app.py`: Flask application
-- `requirements.txt`: Python dependencies
 - `Dockerfile`: Instructions to build the Docker image
 
 📂 **Lab1/**
 ```
 ├── app.py
-├── requirements.txt
 └── Dockerfile
 ```
 
@@ -57,7 +55,7 @@ if __name__ == '__main__':
 FROM python:3.9.1  
 ADD . /python-flask   
 WORKDIR /python-flask
-RUN pip install -r requirements.txt
+RUN pip install flask
 EXPOSE 5000
 ENTRYPOINT [ "python","app.py" ]
 ```
@@ -70,7 +68,7 @@ Open a terminal and run below commands in the terminal
 
 ```bash
 cd ~/swift_training/Lab1
-docker build -t python-flask-app:v1 .
+docker build -t flask-app:v1 .
 ```
 
 ---
@@ -90,7 +88,7 @@ You should see `flask-app` listed.
 Replace `yourdockerhubuser` with your Docker Hub username:
 
 ```bash
-docker tag python-flask-app:v1 yourdockerhubuser/python-flask-app:v1
+docker tag python-flask-app:v1 yourdockerhubuser/flask-app:v1
 ```
 
 ---
@@ -108,7 +106,7 @@ Enter your Docker Hub **username** and **password** (or access token if 2FA is e
 ## ☘️ Step 7: Push the Image to Docker Hub
 
 ```bash
-docker push yourdockerhubuser/python-flask-app:v1
+docker push yourdockerhubuser/flask-app:v1
 ```
 
 ---
@@ -116,7 +114,7 @@ docker push yourdockerhubuser/python-flask-app:v1
 ## ☘️ Step 8: Run a Container from Your Custom Image
 
 ```bash
-docker run -d -p 5000:5000   --name flask-demo   yourdockerhubuser/python-flask-app:v1
+docker run -d -p 5000:5000   --name flask-demo   yourdockerhubuser/flask-app:v1
 ```
 
 ## ☘️ Step 9: Check the running Container

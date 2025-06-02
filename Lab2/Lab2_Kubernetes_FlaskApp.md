@@ -54,7 +54,7 @@ metadata:
 spec:
   containers:
   - name: flask-container
-    image: technoavengers/python-flask-app:v1
+    image: technoavengers/flask-app:v1
     ports:
     - containerPort: 5000
 ```
@@ -151,7 +151,7 @@ spec:
     spec:
       containers:
       - name: flask-container
-        image: technoavengers/python-flask-app:v1
+        image: technoavengers/flask-app:v1
         ports:
         - containerPort: 5000
 ```
