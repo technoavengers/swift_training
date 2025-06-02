@@ -149,7 +149,7 @@ Replace the EC2-Address that you have recieved in last command in below URL
 ## ☘️ Step 12: Connect to Container shell
 Connect inside the running container to debug:
 ```bash
-docker exec -it flask-demo --sh
+docker exec -it flask-demo bash
 ```
 Once connected, run below command to check all files inside container
 ```bash
