@@ -76,6 +76,7 @@ kubectl apply -f flask_pod.yaml
 ```bash
 kubectl get pods
 ```
+Did you check the state of Pod? Is it ContainerCreating?
 
 ---
 
@@ -84,10 +85,18 @@ kubectl get pods
 ```bash
 kubectl describe pod flask-app
 ```
+Notice the last Event section and see image is getting pulled from dockerHub.
+
+
+### ☘️ Step 5: Check the Pod Status again
+```bash
+kubectl get pods
+```
+Is it running now? If not wait for few seconds and run above command again.
 
 ---
 
-### ☘️ Step 5: View Pod Logs
+### ☘️ Step 6: View Pod Logs
 
 ```bash
 kubectl logs flask-app
@@ -95,7 +104,7 @@ kubectl logs flask-app
 
 ---
 
-### ☘️ Step 6: Connect to Pod Shell
+### ☘️ Step 7: Connect to Pod Shell
 
 ```bash
 kubectl exec -it flask-app bash
@@ -109,7 +118,7 @@ exit
 
 ---
 
-### ☘️ Step 7: Delete the Pod
+### ☘️ Step 8: Delete the Pod
 
 ```bash
 kubectl delete pod flask-app
