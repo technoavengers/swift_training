@@ -197,13 +197,13 @@ spec:
 ## ☘️ Step 7: Deploy Flask APP
 
 ```bash
-kubectl apply -f postgres-deployment.yaml
+kubectl apply -f flask-deployment.yaml
 ```
 
 ## ☘️ Step 8: Expose Flask APP
 
 ```bash
-kubectl apply -f postgres-service.yaml
+kubectl apply -f flask-service.yaml
 ```
 
 
