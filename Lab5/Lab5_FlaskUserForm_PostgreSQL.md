@@ -267,5 +267,5 @@ In this lab, you:
 
 ---
 
-🎉 **Well done!** You've now built and deployed a stateful app on Kubernetes using a database backend.  
+🎉 **Well done!** You've now built and deployed a flask app on Kubernetes using a database backend.  
 ✨ **END OF LAB** ✨
