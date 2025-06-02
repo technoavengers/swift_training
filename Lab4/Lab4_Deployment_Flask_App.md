@@ -50,7 +50,7 @@ spec:
 ## ☘️ Step 2: Deploy the First Version (v1)
 
 ```bash
-cd Lab4
+cd ~/swift_training/Lab4
 kubectl apply -f flask_deployment.yaml
 ```
 
@@ -61,8 +61,8 @@ kubectl apply -f flask_deployment.yaml
 ```bash
 kubectl get deployments
 kubectl get pods
-kubectl describe deployment flask-deployment
 ```
+Did you noticed that pods are getting created in rolling update fashion as we discussed?
 
 ---
 
@@ -76,13 +76,10 @@ kubectl rollout status deployment flask-deployment
 
 ## ☘️ Step 5: Update Image to v2
 
+Deploy new image and Check updated pods:
+
 ```bash
 kubectl set image deployment flask-deployment flask-container=technoavengers/flask-app:v2
-```
-
-Check updated pods:
-
-```bash
 kubectl get pods
 ```
 
@@ -121,10 +118,20 @@ To rollback to the previous version (v2):
 kubectl rollout undo deployment flask-deployment
 ```
 
+Check the image version
+```bash
+kubectl describe deployment flask-deployment | grep -i image
+```
+
 If you want to roll back to a specific revision:
 
 ```bash
-kubectl rollout undo deployment flask-deployment --to-revision=2
+kubectl rollout undo deployment flask-deployment --to-revision=1
+```
+
+Check the image version again
+```bash
+kubectl describe deployment flask-deployment | grep -i image
 ```
 
 ---
