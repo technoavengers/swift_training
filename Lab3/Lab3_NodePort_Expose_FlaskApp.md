@@ -24,11 +24,11 @@ Create the same replica set again with 3 replicas as we have explored in last la
 
 ```bash
 cd ~/swift_training/Lab3
-kubecl apply -f flask_replicaset.yaml
+kubectl apply -f flask_replicaset.yaml
 ```
 
 
-## ☘️ Step 1: Explore NodePort YAML File
+## ☘️ Step 2: Explore NodePort YAML File
 
 In `Lab3`, open the file `flask_nodeport_service.yaml`:
 
@@ -50,16 +50,15 @@ spec:
 
 ---
 
-## ☘️ Step 2: Deploy the NodePort Service
+## ☘️ Step 3: Deploy the NodePort Service
 
 ```bash
-cd Lab3
-kubectl apply -f flask_nodeport.yaml
+kubectl apply -f flask_nodeport_service.yaml
 ```
 
 ---
 
-## ☘️ Step 3: Verify the Service
+## ☘️ Step 4: Verify the Service
 
 ```bash
 kubectl get svc flask-nodeport
@@ -74,14 +73,18 @@ flask-nodeport   NodePort   <cluster-ip>   <none>   5000:30000/TCP   1m
 ---
 
 
-## ☘️ Step 6: Test Using Port Forwarding 
+## ☘️ Step 5: Do Port Forwarding 
 
 
 ```bash
-kubectl port-forward service/flask-nodeport 8080:5000
+kubectl port-forward service/flask-nodeport 8888:5000
 ```
+Make sure to keep the above terminal running
 
-Now run curl command to test the service:
+
+## ☘️ Step 6: Test Using Curl Command
+
+Open a new terminal and now run curl command to test the service:
 
 ```
 curl http://localhost:8080
@@ -93,6 +96,7 @@ curl http://localhost:8080
 
 ```bash
 kubectl delete svc flask-nodeport
+kubectl delete rs flask-replicaset
 ```
 
 ---
