@@ -66,8 +66,10 @@ ENTRYPOINT [ "python","app.py" ]
 
 ## ☘️ Step 3: Build the Docker Image
 
+Open a terminal and run below commands in the terminal 
+
 ```bash
-cd Lab1
+cd ~/swift_training/Lab1
 docker build -t python-flask-app:v1 .
 ```
 
@@ -88,7 +90,7 @@ You should see `flask-app` listed.
 Replace `yourdockerhubuser` with your Docker Hub username:
 
 ```bash
-docker tag flask-app:v1 yourdockerhubuser/python-flask-app:v1
+docker tag python-flask-app:v1 yourdockerhubuser/python-flask-app:v1
 ```
 
 ---
@@ -122,11 +124,12 @@ docker run -d -p 5000:5000   --name flask-demo   yourdockerhubuser/python-flask-
 ## ☘️ Step 9: Access the Flask App
 
 ### 🔍 To get the EC2 public IP address:
-Run the following command in terminal:
+Run the following command in terminal and it will provide you public IP address of EC2 machine you are using:
 ```bash
 curl http://169.254.169.254/latest/meta-data/public-ipv4
 ```
 ### 🔍 Open your local browser and go to:
+Replace the EC2-Address that you have recieved in last command in below URL
 
   👉 `http://<your-ec2-public-ip>:5000`
 
