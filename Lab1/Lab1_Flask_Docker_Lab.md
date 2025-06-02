@@ -88,7 +88,7 @@ You should see `flask-app` listed.
 Replace `yourdockerhubuser` with your Docker Hub username:
 
 ```bash
-docker tag python-flask-app:v1 yourdockerhubuser/flask-app:v1
+docker tag flask-app:v1 yourdockerhubuser/flask-app:v1
 ```
 
 ---
