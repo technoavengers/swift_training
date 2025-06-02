@@ -57,7 +57,7 @@ if __name__ == '__main__':
 FROM python:3.9.1  
 ADD . /python-flask   
 WORKDIR /python-flask
-RUN pip install flask
+RUN pip install -r requirements.txt
 EXPOSE 5000
 ENTRYPOINT [ "python","app.py" ]
 ```
@@ -119,9 +119,21 @@ docker push yourdockerhubuser/python-flask-app:v1
 docker run -d -p 5000:5000   --name flask-demo   yourdockerhubuser/python-flask-app:v1
 ```
 
+## ☘️ Step 9: Check the running Container
+
+```bash
+docker ps
+```
+
+## ☘️ Step 10: Check the logs of container
+
+```bash
+docker logs flask-demo
+```
+
 ---
 
-## ☘️ Step 9: Access the Flask App
+## ☘️ Step 11: Access the Flask App
 
 ### 🔍 To get the EC2 public IP address:
 Run the following command in terminal and it will provide you public IP address of EC2 machine you are using:
@@ -134,7 +146,22 @@ Replace the EC2-Address that you have recieved in last command in below URL
   👉 `http://<your-ec2-public-ip>:5000`
 
 
-## ☘️ Step 10: Cleanup
+## ☘️ Step 12: Connect to Container shell
+Connect inside the running container to debug:
+```bash
+docker exec -it flask-demo --sh
+```
+Once connected, run below command to check all files inside container
+```bash
+ls
+```
+
+To come out of container shell, run below command
+```bash
+exit
+```
+
+## ☘️ Step 13: Cleanup
 🧹 Stop and Remove the Container
 
 ```bash
