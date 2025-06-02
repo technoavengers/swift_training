@@ -91,7 +91,9 @@ def submit():
 
 ---
 
-## ☘️ Step 2: PostgreSQL Deployment + Service
+## ☘️ Step 2: Explore PostgreSQL Deployment 
+
+Explore the posgtres deployment file 
 
 ### `postgres-deployment.yaml`
 
@@ -122,7 +124,27 @@ spec:
           value: flaskpass
         ports:
         - containerPort: 5432
----
+  ```
+
+## ☘️ Step 3: Deploy Postgres
+
+```bash
+cd ~/swift_training/Lab5
+kubectl apply -f postgres-deployment.yaml
+```
+check pod status
+
+```bash
+kubectl get pod
+```
+Wait for Pod to come in running state.
+
+
+## ☘️ Step 4: Explore Postgres Service
+
+### `postgres-service.yaml`
+
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -136,9 +158,15 @@ spec:
     targetPort: 5432
 ```
 
----
+## ☘️ Step 5: Deploy Postgres Service
 
-## ☘️ Step 3: Flask Deployment + NodePort Service
+```bash
+kubectl apply -f postgres-service.yaml
+kubectl get svc
+```
+
+
+## ☘️ Step 6: Flask Deployment
 
 ### `flask-deployment.yaml`
 
@@ -159,23 +187,27 @@ spec:
     spec:
       containers:
       - name: flask-container
-        image: technoavengers/flask-app:userform
+        image: technoavengers/flask-app-userform
         ports:
         - containerPort: 5000
 ```
 
 ---
 
-## ☘️ Step 4: Deploy Everything
+## ☘️ Step 7: Deploy Flask APP
 
 ```bash
 kubectl apply -f postgres-deployment.yaml
-kubectl apply -f flask-deployment.yaml
 ```
 
----
+## ☘️ Step 8: Expose Flask APP
 
-## ☘️ Step 11: Access the Flask App
+```bash
+kubectl apply -f postgres-service.yaml
+```
+
+
+## ☘️ Step 9: Access the Flask App
 
 ### 🔍 To get the EC2 public IP address:
 Run the following command in terminal and it will provide you public IP address of EC2 machine you are using:
@@ -189,7 +221,7 @@ Replace the EC2-Address that you have recieved in last command in below URL
 
 ---
 
-## ☘️ Step 6: Test the App
+## ☘️ Step 10: Test the App
 
 - Fill in a **username** and **age**
 - Click **Submit**
@@ -198,7 +230,7 @@ Replace the EC2-Address that you have recieved in last command in below URL
 
 ---
 
-## ☘️ Step 7: Verify DB (Optional)
+## ☘️ Step 11: Verify DB (Optional)
 
 Inside terminal, connect to the postgres pod:
 
@@ -214,11 +246,13 @@ SELECT * FROM users;
 
 ---
 
-## ☘️ Step 8: Cleanup
+## ☘️ Step 12: Cleanup
 
 ```bash
 kubectl delete -f flask-deployment.yaml
+kubectl delete -f flask-service.yaml
 kubectl delete -f postgres-deployment.yaml
+kubectl delete -f postgress-service.yaml
 ```
 
 ---
