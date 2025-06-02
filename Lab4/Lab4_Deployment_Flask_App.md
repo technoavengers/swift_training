@@ -1,6 +1,6 @@
 # ✅ Lab 4: Deploy Flask App with Kubernetes Deployment and Rolling Updates
 
-**Time:** 25–30 Minutes
+**Time:** 20 Minutes
 
 ---
 
