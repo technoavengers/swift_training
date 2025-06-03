@@ -49,7 +49,7 @@ kubectl create secret generic postgres-secret \
 ```
 Check Secrets
 ```bash
-kubectl get svc
+kubectl get secret
 ```
 
 ### Step 3: Deploy PostgreSQL
