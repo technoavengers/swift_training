@@ -19,6 +19,23 @@ In this lab, you will expose your Python-Flask application running on Kubernetes
 
 ---
 
+## ☘️ Pre-requiste : Setup K3s Cluster
+1. Stop Minikube
+```bash
+minikube stop
+minikube delete
+```
+
+
+1. Run below to start k3s cluster
+
+```bash
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable=traefik" sh -
+sudo cp /etc/rancher/k3s/k3s.yaml $HOME/k3s.yaml
+sudo chown $USER:$USER $HOME/k3s.yaml
+export KUBECONFIG=$HOME/k3s.yaml
+```
+
 ## ☘️ Step 1: Run the Flask APP Replica Set
 Create the same replica set again with 3 replicas as we have explored in last lab.
 
@@ -73,21 +90,39 @@ flask-nodeport   NodePort   <cluster-ip>   <none>   5000:30000/TCP   1m
 ---
 
 
-## ☘️ Step 5: Do Port Forwarding 
+## ☘️ Step 5: Access the Flask App
 
+### 🔍 To get the EC2 public IP address:
+Run the following command in terminal and it will provide you public IP address of EC2 machine you are using:
+```bash
+curl http://169.254.169.254/latest/meta-data/public-ipv4
+```
+### 🔍 Open your local browser and go to:
+Replace the EC2-Address that you have recieved in last command in below URL
+
+  👉 `http://<your-ec2-public-ip>:30000`
+
+
+## ☘️ Step 6: Let's create a LoadBalancer Service
 
 ```bash
-kubectl port-forward service/flask-nodeport 8888:5000
+kubectl apply -f flask_loadbalancer_service.yaml
 ```
-Make sure to keep the above terminal running
 
+---
 
-## ☘️ Step 6: Test Using Curl Command
+## ☘️ Step 7: Verify the Service
 
-Open a new terminal and now run curl command to test the service:
-
+```bash
+kubectl get svc 
 ```
-curl http://localhost:8888
+
+## ☘️ Step 8: Access the Flask App
+
+Use the External IP and nodePort provided in loadbalancer svc
+
+```bash
+curl http://external-ip:nodePort
 ```
 
 ---
