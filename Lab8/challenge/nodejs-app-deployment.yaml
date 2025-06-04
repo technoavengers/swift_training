@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nodeapp-container
-        image: navjoy220161/node-mongo:1.0.10
+        image: #TODO add your image here
         ports:
         - containerPort: 3000
         # TODO Add all environment variable from configmap 'app-configmap-test'
