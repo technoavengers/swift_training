@@ -20,6 +20,7 @@ kubectl top nodes
 Check the deployment file, check out the resource section to see requested resources and what is limit on resources.
 
 ```bash
+cd ~/swift_training/
 kubectl apply -f deployment_with_resources.yaml
 ```
 
@@ -62,6 +63,8 @@ kubectl exec -it <pod-name> -- /bin/sh
 while true; do :; done
 ```
 
+Keep the above terminal open
+
 This will artificially increase the CPU usage and trigger the HPA to scale up the number of pods.
 
 ## ☘️ Step 8 : Monitor the HPA
@@ -75,5 +78,11 @@ kubectl get hpa -w
 As the CPU usage increases, the HPA will increase the number of  replicas up to the maximum (5 replicas, in this case). Once the CPU usage decreases, the HPA will scale down the pods.
 
 
+## ☘️ Step 9: Cleanup
+
+```bash
+cd ~/swift_training/Lab15
+kubectl delete -f .
+```
 
 ## ✅ End of Lab

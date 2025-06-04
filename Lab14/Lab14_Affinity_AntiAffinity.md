@@ -16,7 +16,6 @@ This lab will help you understand how to configure **node affinity** and **pod a
 Start a Minikube cluster with 3 nodes:
 
 ```bash
-minikube delete
 minikube start --nodes 3
 ```
 
@@ -59,6 +58,7 @@ Explore the YAML file `minio_statefulset_with_node_affinity.yaml` located in Lab
 Apply the StatefulSet:
 
 ```bash
+cd ~/swift_training/Lab14
 kubectl apply -f minio_statefulset_with_node_affinity.yaml
 ```
 
@@ -124,7 +124,12 @@ kubectl apply -f minio_statefulset_with_node_affinity_pod_antiaffinity.yaml
 
 ---
 
-## 🔍 Explanation
+## ☘️ Step 8: Check Pod again
+
+```bash
+kubectl get pod -o wide
+```
+Check for below 
 
 ### 🔹 Node Affinity
 - Ensures pods are only scheduled on nodes with label `node-type=storage-node`
@@ -135,7 +140,20 @@ kubectl apply -f minio_statefulset_with_node_affinity_pod_antiaffinity.yaml
 - Controlled using `topologyKey: kubernetes.io/hostname`
 - Spreads pods across available nodes
 
----
+
+## ☘️ Step 9: Remove Labels from all machine
+
+```bash
+kubectl label nodes minikube node-type-
+kubectl label nodes minikube-m02 node-type-
+```
+
+## ☘️ Step 10: Cleanup
+```bash
+cd ~/swift_training/Lab14
+kubectl delete -f .
+```
+
 
 ## ✅ End of Lab
 
