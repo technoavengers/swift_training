@@ -63,7 +63,7 @@ spec:
 ```
 
 ```bash
-cd Kubernetes_Dockers/Lab9
+cd ~/swift_training/Lab9
 kubectl apply -f mongodb-headless-service.yaml
 kubectl get svc
 ```
