@@ -52,7 +52,14 @@ Check Secrets
 kubectl get secret
 ```
 
-### Step 3: Deploy PostgreSQL
+### Step 3: Create PVC with Storage Class
+
+```bash
+cd ~/swift_training/Lab6
+kubectl apply -f postgres-pv-pvc.yaml
+```
+
+### Step 4: Deploy PostgreSQL
 
 ```bash
 kubectl apply -f postgres-deployment.yaml
@@ -65,7 +72,7 @@ kubectl get svc
 ```
 
 
-### Step 4: Deploy Flask App
+### Step 5: Deploy Flask App
 
 ```bash
 kubectl apply -f flask-deployment.yaml
@@ -78,23 +85,29 @@ kubectl get pod
 kubectl get svc
 ```
 
-### Step 5: Connect to Flask Pod
+### Step 6: Connect to Flask Pod
 
 Connect to Flask Pod terminal 
 ```bash
 kubectl exec -it flask-pod-name -- bash
 ```
-Once inside the pod, check for environment variables
+Once inside the pod, check for environment variables that you have set in configmap
 ```bash
 env
 ```
+
 Once inside the pod, check for mounted secret
 ```bash
 cat /mnt/secrets/DB_USER
 cat /mnt/secrets/DB_PASSWORD
 ```
 
-## ☘️ Step 6: Access the Flask App
+Exit the pod
+```bash
+exit
+```
+
+## ☘️ Step 7: Access the Flask App
 
 ### 🔍 To get the EC2 public IP address:
 Run the following command in terminal and it will provide you public IP address of EC2 machine you are using:
@@ -108,7 +121,7 @@ Replace the EC2-Address that you have recieved in last command in below URL
 
 ---
 
-## ☘️ Step 7: Test the App
+## ☘️ Step 8: Test the App
 
 - Fill in a **username** and **age**
 - Click **Submit**
