@@ -68,6 +68,12 @@ kubectl get pods
 
 > ✅ Ensure that the Cassandra pod status shows `Running`.
 
+```bash
+kubectl describe pod cassandra-0
+```
+
+> ✅ If you see a `Warning` in the event section and it says unhealthy which means you have to wait.
+
 ---
 
 ## ☘️ Step 5: Connect to Cassandra using `cqlsh`
@@ -104,6 +110,33 @@ INSERT INTO users (id, name, email) VALUES (uuid(), 'Navdeep', 'navdeep@example.
 
 SELECT * FROM users;
 ```
+
+Exit from cqlsh
+
+```bash
+exit
+```
+Now exit from pod
+
+```bash
+exit
+```
+
+## ☘️ Step 7: cleanup
+```bash
+helm uninstall cassandra
+```
+Uninstalling helm does not delete
+
+So check pvc and delete it
+
+```bash
+kubectl get pvc
+```
+```bash
+kubectl delete pvc data-cassandra-0
+```
+
 
 ---
 

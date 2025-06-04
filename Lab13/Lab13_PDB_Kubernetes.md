@@ -1,5 +1,5 @@
 
-# ✅ Lab 12: Understanding PodDisruptionBudgets (PDB) and Horizontal Pod Autoscaler (HPA) in Kubernetes
+# ✅ Lab 13: Understanding PodDisruptionBudgets (PDB) and Horizontal Pod Autoscaler (HPA) in Kubernetes
 
 🕒 **Estimated Time**: 25–30 minutes
 
@@ -25,6 +25,11 @@ Check nodes
 kubectl get node
 ```
 
+Since k3s and minikube both are running
+Please check context, it should point to minikube as current (*)
+```bash
+kubectl config get-contexts
+```
 
 
 ## ☘️ Step 1: Create a Deployment
@@ -46,7 +51,7 @@ Did you noticed that pods are running on different minikube nodes
 
 ## ☘️ Step 3 : Create a PodDisruptionBudget
 
-You have been provided with  file named `pdb.yaml` in Lab12 folder.
+You have been provided with  file named `pdb.yaml` in Lab13 folder.
 
 ```yaml
 apiVersion: policy/v1
@@ -69,6 +74,7 @@ This PodDisruptionBudget (PDB) ensures that at least 2 pods with the label app: 
 ## ☘️ Step 4: Apply the PDB:
 
 ```bash
+cd ~/swift_training/Lab13
 kubectl apply -f pdb.yaml
 ```
 
@@ -125,6 +131,13 @@ kubectl uncordon minikube-m03
 
 ```bash
 kubectl get node
+```
+
+## ☘️ Step 12: Cleanup
+
+```bash
+kubectl delete -f .
+kubectl delete deployment web
 ```
 
 END OF PART-1
