@@ -1,5 +1,5 @@
 
-# ✅ Lab 9: Installing Apache Cassandra on Kubernetes Using Helm
+# ✅ Lab 11: Installing Apache Cassandra on Kubernetes Using Helm
 
 🕒 **Estimated Time**: 15–20 minutes
 
@@ -10,25 +10,25 @@ In this lab, we are going to install a Cassandra cluster on Kubernetes using the
 
 ---
 
+## ☘️ Pre-requiste : Setup K3s Cluster
+```bash
+cd ~/swift_training/Lab10
+chmod 777 runk3s.sh
+./runk3s.sh
+```
+
+check your nodes
+```bash
+kubectl get node
+```
+
+
 ## ☘️ Step 0: Explore the Cassandra Helm Chart
 Before installing, explore the Helm chart configuration options, default values, and documentation provided by Bitnami:
 👉 [Bitnami Cassandra Helm Chart on Artifact Hub](https://artifacthub.io/packages/helm/bitnami/cassandra)
 ---
 
 You can also inspect default values used in the chart by downloading on local machine:
-
-Make sure you are in Lab10 folder
-
-```bash
-cd Kubernetes_Dockers/Lab11
-```
-
-Let's download default values.yaml in Lab10 folder
-
-```bash
-helm show values oci://registry-1.docker.io/bitnamicharts/cassandra > default-values.yaml
-```
-Above command will create a default-values.yaml in your Lab10 folder, explore values.yaml file.
 
 
 ## ☘️ Step 1: Add the Bitnami Helm Repository
@@ -38,6 +38,17 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 ```
 
+## ☘️ Step 1: Download default values.yaml
+```bash
+cd ~/swift_training/Lab11
+```
+
+Let's download default values.yaml
+
+```bash
+helm show values oci://registry-1.docker.io/bitnamicharts/cassandra > default-values.yaml
+```
+Above command will create a default-values.yaml in your Lab11 folder, explore values.yaml file.
 
 ---
 
