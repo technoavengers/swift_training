@@ -36,7 +36,7 @@ A Helm chart is a collection of YAML files that define a related set of Kubernet
 ---
 ## ☘️ Pre-requiste : Setup K3s Cluster
 ```bash
-cd ~/swift-training/Lab10
+cd ~/swift_training/Lab10
 chmod 777 runk3s.sh
 ./runk3s.sh
 ```
