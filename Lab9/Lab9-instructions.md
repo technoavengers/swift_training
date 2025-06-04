@@ -1,5 +1,5 @@
 
-# ✅ Lab 7: Deploying MongoDB as a StatefulSet in Kubernetes
+# ✅ Lab 9: Deploying MongoDB as a StatefulSet in Kubernetes
 
 **Time**: 25 mins
 
@@ -18,12 +18,18 @@ In this lab, participants will deploy MongoDB as a StatefulSet in Kubernetes, en
 
 ---
 
-## ☘️ Pre-requisite: Verify Cluster
-Ensure your Minikube cluster is running.
+## ☘️ Pre-requisite: Run K3s cluster
 
 ```bash
-minikube start
+export KUBECONFIG=$HOME/k3s.yaml
 ```
+
+Verify cluster
+
+```bash
+kubectl get node
+```
+
 
 ---
 
@@ -34,7 +40,7 @@ kubectl delete --all deployment
 kubectl delete --all replicaset
 kubectl delete --all pod
 kubectl delete svc mongodb-service mongodb-headless
-kubectl delete pvc -l app=mongo
+kubectl delete --all pvc
 ```
 
 ---
@@ -227,7 +233,7 @@ Each pod has its own PVC, such as:
 ```bash
 kubectl delete statefulset mongodb
 kubectl delete svc mongodb-h mongodb-service
-kubectl delete pvc -l app=mongo
+kubectl delete --all pvc
 ```
 
 ---
