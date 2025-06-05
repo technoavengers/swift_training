@@ -1,0 +1,33 @@
+kubectl config use-context default
+
+
+helm repo add argo https://argoproj.github.io/argo-helm
+helm repo update
+kubectl create namespace argocd
+helm install argocd argo/argo-cd -n argocd
+
+kubectl get svc -n argocd
+
+
+edit service argocd-server
+kubectl edit svc argocd-server -n argocd
+
+
+insert mode
+type-NodePort
+- nodeport-30000
+
+escape - :wq!
+
+
+Check your Ec2 Ip address: 30000 argocd UI
+
+
+
+username-admin
+kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d && echo
+
+
+Create a project to sync GitHub repo
+https://github.com/technoavengers/python-flask-app.git
+k8s
