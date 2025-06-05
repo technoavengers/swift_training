@@ -152,7 +152,7 @@ You can also Upgrade your release with a new value by setting in command itself:
 Make sure you are in Lab10 folder in vscode terminal before running below command
 
 ```bash
-helm upgrade mysql bitnami/mysql --set service.type=ClusterIP
+helm upgrade mysql bitnami/mysql --set primary.service.type=ClusterIP
 ```
 
 ## 🚀 Step 11: Check the service type:
