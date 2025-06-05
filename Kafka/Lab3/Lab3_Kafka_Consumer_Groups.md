@@ -1,5 +1,5 @@
 
-# ✅ Lab 18: Working with Kafka Consumer Groups
+# ✅ Lab 3: Working with Kafka Consumer Groups
 
 🕒 **Estimated Time**: 15 minutes
 
@@ -22,6 +22,7 @@ This lab will teach you how Kafka consumer groups work. You'll observe how messa
 ## ☘️ Step 1: Create a Topic with Multiple Partitions
 
 ```bash
+cd ~/kafka
 ~/kafka/bin/kafka-topics.sh --create   --bootstrap-server localhost:9092   --replication-factor 1   --partitions 3   --topic group-topic
 ```
 

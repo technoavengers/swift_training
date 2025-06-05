@@ -16,7 +16,7 @@ This lab will help you understand how to configure **node affinity** and **pod a
 Start a Minikube cluster with 3 nodes:
 
 ```bash
-minikube start --nodes 3
+minikube start --nodes=3
 ```
 
 ---

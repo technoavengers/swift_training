@@ -1,7 +1,7 @@
 
-# ✅ Lab 16: Getting Started with Apache Kafka CLI
+# ✅ Lab 1: Getting Started with Apache Kafka CLI
 
-🕒 **Estimated Time**: 20–25 minutes
+🕒 **Estimated Time**: 15 minutes
 
 ---
 
@@ -25,7 +25,8 @@ Run below command in Vscode terminal to start kafka and Zookeeper.
 
 
 ```bash
-~/kafka/start-kafka.sh
+cd ~/kafka
+./start-kafka.sh
 ```
 
 ---

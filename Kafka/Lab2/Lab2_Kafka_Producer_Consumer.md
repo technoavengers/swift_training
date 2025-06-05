@@ -1,5 +1,5 @@
 
-# ✅ Lab 17: Producing and Consuming Messages with Kafka CLI
+# ✅ Lab 2: Producing and Consuming Messages with Kafka CLI
 
 🕒 **Estimated Time**: 20–25 minutes
 
@@ -22,6 +22,7 @@ In this lab, you'll learn to use `kafka-console-producer.sh` and `kafka-console-
 ## ☘️ Step 1: Create a Topic
 
 ```bash
+cd ~/kafka
 ~/kafka/bin/kafka-topics.sh --create   --bootstrap-server localhost:9092   --replication-factor 1   --partitions 1   --topic demo-topic
 ```
 
