@@ -43,6 +43,7 @@ Keep this terminal open. It will display messages as they are produced.
 ## ☘️ Step 3: Open a New Terminal and Start the Kafka Console Producer
 
 ```bash
+cd ~/kafka
 ~/kafka/bin/kafka-console-producer.sh   --broker-list localhost:9092   --topic demo-topic
 ```
 

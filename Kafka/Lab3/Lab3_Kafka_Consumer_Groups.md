@@ -35,6 +35,7 @@ cd ~/kafka
 
 
 ```bash
+cd ~/kafka
 ~/kafka/bin/kafka-console-consumer.sh   --bootstrap-server localhost:9092   --topic group-topic   --group demo-group
 ```
 
@@ -66,6 +67,7 @@ Open a second terminal and run:
 
 
 ```bash
+cd ~/kafka
 ~/kafka/bin/kafka-console-consumer.sh   --bootstrap-server localhost:9092   --topic group-topic   --group demo-group
 
 ```
@@ -88,6 +90,7 @@ This time you will see in client_id, one partition is assigned to one consumer a
 Open a second terminal and run:
 
 ```bash
+cd ~/kafka
 ~/kafka/bin/kafka-console-consumer.sh   --bootstrap-server localhost:9092   --topic group-topic   --group demo-group
 ```
 
