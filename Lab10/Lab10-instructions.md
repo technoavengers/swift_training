@@ -39,6 +39,7 @@ A Helm chart is a collection of YAML files that define a related set of Kubernet
 cd ~/swift_training/Lab10
 chmod 777 runk3s.sh
 ./runk3s.sh
+export KUBECONFIG=$HOME/k3s.yaml
 ```
 
 check your nodes
@@ -80,20 +81,20 @@ helm repo update
 
 ## 🔍 Step 3: Search for Available Charts
 
-Search for charts related to nginx:
+Search for charts related to mysql:
 
 ```bash
-helm search repo nginx
+helm search repo mysql
 ```
 
 ---
 
 ## 🚀 Step 4: Install a Helm Chart
 
-Install the Bitnami nginx chart:
+Install the Bitnami mysql chart:
 
 ```bash
-helm install my-nginx bitnami/nginx
+helm install mysql bitnami/mysql
 ```
 
 ## 🚀 Step 5: Check the release and pods:
@@ -128,7 +129,7 @@ service:
 Let's upgrade the helm chart with custom values using `custom-values.yaml` file:
 
 ```bash
-helm upgrade my-nginx bitnami/nginx -f custom-values.yaml
+helm upgrade mysql bitnami/mysql -f custom-values.yaml
 ```
 
 It will override default service type to type NodePort because of my custom value.
@@ -148,10 +149,10 @@ Did you noticed that this time svc type is NodePort
 ## 🔄 Step 10: Upgrade with --set command
 
 You can also Upgrade your release with a new value by setting in command itself:
-Make sure you are in Lab9 folder in vscode terminal before running below command
+Make sure you are in Lab10 folder in vscode terminal before running below command
 
 ```bash
-helm upgrade my-nginx bitnami/nginx --set service.type=ClusterIP
+helm upgrade mysql bitnami/mysql --set service.type=ClusterIP
 ```
 
 ## 🚀 Step 11: Check the service type:
@@ -167,7 +168,7 @@ Did you noticed that this time svc type is ClusterIP
 Rollback to the previous version:
 
 ```bash
-helm rollback my-nginx
+helm rollback mysql
 ```
 
 
@@ -186,7 +187,7 @@ Did you noticed that this time service type is NodePort again because of rollbac
 Remove the deployed Helm release:
 
 ```bash
-helm uninstall my-nginx
+helm uninstall mysql
 ```
 
 ---
