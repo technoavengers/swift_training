@@ -16,6 +16,7 @@ This lab will help you understand how to configure **node affinity** and **pod a
 Start a Minikube cluster with 3 nodes:
 
 ```bash
+minikube delete
 minikube start --nodes=3
 ```
 
@@ -150,7 +151,7 @@ kubectl label nodes minikube-m02 node-type-
 
 ## ☘️ Step 10: Cleanup
 ```bash
-cd ~/swift_training/Lab14
+cd ~/swift_training/Lab13
 kubectl delete -f .
 ```
 

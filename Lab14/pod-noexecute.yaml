@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-noexecute
+spec:
+  tolerations:
+    - key: "env"
+      operator: "Equal"
+      value: "dev"
+      effect: "NoExecute"
+      tolerationSeconds: 20
+  containers:
+    - name: nginx
+      image: nginx
