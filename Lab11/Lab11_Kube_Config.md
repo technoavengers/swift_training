@@ -19,7 +19,6 @@ Learn how to:
 
 ```bash
 kubectl config view
-kubectl config view --minify --flatten
 ```
 
 ---
@@ -57,12 +56,6 @@ K3s kubeconfig location:
 
 ```bash
 sudo cat /etc/rancher/k3s/k3s.yaml > ~/k3s.yaml
-sed -i "s/127.0.0.1/$(hostname -I | awk '{print $1}')/g" ~/k3s.yaml
-```
-
-Merge:
-
-```bash
 export KUBECONFIG=~/.kube/config:~/k3s.yaml
 kubectl config view --flatten > ~/.kube/config-merged
 mv ~/.kube/config-merged ~/.kube/config
@@ -80,7 +73,7 @@ kubectl get nodes
 
 ### Switch to K3s
 ```bash
-kubectl config use-context k3s
+kubectl config use-context default
 kubectl get nodes
 ```
 
@@ -97,7 +90,7 @@ kubectl get pods
 
 ### K3s
 ```bash
-kubectl config use-context k3s
+kubectl config use-context default
 kubectl create deployment nginx --image=nginx
 kubectl get pods
 ```
@@ -121,7 +114,7 @@ kubectl config set-context minikube --namespace=dev
 
 ### K3s:
 ```bash
-kubectl config set-context k3s --namespace=qa
+kubectl config set-context default --namespace=qa
 ```
 
 ---
@@ -130,10 +123,10 @@ kubectl config set-context k3s --namespace=qa
 
 ```bash
 kubectl config use-context minikube
-kubectl delete deployment nginx
+kubectl delete deployment nginx -n default
 
-kubectl config use-context k3s
-kubectl delete deployment nginx
+kubectl config use-context default
+kubectl delete deployment nginx -n default
 ```
 
 ---
