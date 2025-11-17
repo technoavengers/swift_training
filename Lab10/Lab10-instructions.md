@@ -94,7 +94,9 @@ helm search repo mysql
 Install the Bitnami mysql chart:
 
 ```bash
-helm install mysql bitnami/mysql
+helm install mysql bitnami/mysql \
+  --set image.repository=bitnamilegacy/mysql \
+  --set image.tag=8.4
 ```
 
 ## 🚀 Step 5: Check the release and pods:
