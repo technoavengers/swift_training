@@ -58,7 +58,7 @@ Explore the YAML file `minio_statefulset_with_node_affinity.yaml` located in Lab
 Apply the StatefulSet:
 
 ```bash
-cd ~/swift_training/Lab14
+cd ~/swift_training/Lab13
 kubectl apply -f minio_statefulset_with_node_affinity.yaml
 ```
 

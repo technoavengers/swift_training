@@ -74,7 +74,7 @@ This PodDisruptionBudget (PDB) ensures that at least 2 pods with the label app: 
 ## ☘️ Step 4: Apply the PDB:
 
 ```bash
-cd ~/swift_training/Lab13
+cd ~/swift_training/Lab12
 kubectl apply -f pdb.yaml
 ```
 
