@@ -1,157 +1,142 @@
-✅ Lab: Understanding Kubeconfig & Switching Between Minikube and K3s
+# Lab: Understanding Kubeconfig & Switching Between Minikube and K3s
 
-🕒 Estimated Time: 15–20 minutes
+## Estimated Time
+15–20 minutes
 
-🎯 Objective
+---
 
-In this lab you will learn:
+## 🎯 Objective
+Learn how to:
+- Understand kubeconfig structure
+- List clusters, contexts, and users
+- Switch between Minikube and K3s
+- Merge multiple kubeconfig files
+- Set default namespaces per context
 
-What a kubeconfig file is
+---
 
-How to list clusters, users, and contexts
+## 🔍 Step 1: View Your Kubeconfig
 
-How to switch between Minikube and K3s
-
-How to merge multiple kubeconfig files
-
-How to set default namespace inside a context
-
-Perfect for developers running multiple clusters on the same laptop.
-
-🔍 Step 1: View Your Current Kubeconfig
-
-Kubeconfig is stored at:
-
-~/.kube/config
-
-
-View it:
-
+```bash
 kubectl config view
-
-
-Pretty-format it:
-
 kubectl config view --minify --flatten
+```
 
-🧩 Step 2: List All Clusters, Users, and Contexts
+---
+
+## 🧩 Step 2: List Clusters, Users & Contexts
+
+```bash
 kubectl config get-clusters
 kubectl config get-users
 kubectl config get-contexts
+```
 
+---
 
-Expected output (example):
+## ☸️ Step 3: Start Both Clusters
 
-CURRENT   NAME
-*         minikube
-          k3s
-
-☸️ Step 3: Start Both Clusters
-Start Minikube
+### Start Minikube
+```bash
 minikube start
+```
 
-Start K3s (external machine or local)
-
-If local K3s (binary install):
-
+### Start K3s
+```bash
 sudo systemctl start k3s
+```
 
-
-K3s stores its kubeconfig at:
-
+K3s kubeconfig location:
+```
 /etc/rancher/k3s/k3s.yaml
+```
 
-🪄 Step 4: Import K3s Kubeconfig Into Your Main Config
+---
 
-K3s uses root-permission config, so copy it:
+## 🪄 Step 4: Import & Merge K3s Kubeconfig
 
+```bash
 sudo cat /etc/rancher/k3s/k3s.yaml > ~/k3s.yaml
-
-
-Fix the server URL inside k3s.yaml:
-
 sed -i "s/127.0.0.1/$(hostname -I | awk '{print $1}')/g" ~/k3s.yaml
+```
 
+Merge:
 
-Now merge with your main kubeconfig:
-
+```bash
 export KUBECONFIG=~/.kube/config:~/k3s.yaml
 kubectl config view --flatten > ~/.kube/config-merged
 mv ~/.kube/config-merged ~/.kube/config
+```
 
+---
 
-Now verify:
+## 🔄 Step 5: Switch Between Clusters
 
-kubectl config get-contexts
-
-
-You should see:
-
-minikube
-
-k3s
-
-🔄 Step 5: Switch Between Clusters
-
-Switch to Minikube:
-
+### Switch to Minikube
+```bash
 kubectl config use-context minikube
 kubectl get nodes
+```
 
-
-Switch to K3s:
-
+### Switch to K3s
+```bash
 kubectl config use-context k3s
 kubectl get nodes
+```
 
-🧪 Step 6: Test Deployments on Each Cluster
-Test on Minikube
+---
+
+## 🧪 Step 6: Test Deployments
+
+### Minikube
+```bash
 kubectl config use-context minikube
 kubectl create deployment nginx --image=nginx
 kubectl get pods
+```
 
-Test on K3s
+### K3s
+```bash
 kubectl config use-context k3s
 kubectl create deployment nginx --image=nginx
 kubectl get pods
+```
 
-🎯 Step 7: View Current Context
+---
 
-To see which cluster you're connected to:
+## 🎯 Step 7: Check Current Context
 
+```bash
 kubectl config current-context
+```
 
-🧭 Step 8: Set Default Namespace in a Context
-Set for Minikube:
+---
+
+## 🧭 Step 8: Set Default Namespace
+
+### Minikube:
+```bash
 kubectl config set-context minikube --namespace=dev
+```
 
-Set for K3s:
+### K3s:
+```bash
 kubectl config set-context k3s --namespace=qa
+```
 
+---
 
-Check:
+## 🧹 Step 9: Clean Up
 
-kubectl config view
-
-🧹 Step 9: Clean Up
-
-Switch to Minikube & delete test deployment:
-
+```bash
 kubectl config use-context minikube
 kubectl delete deployment nginx
 
-
-Switch to K3s & delete:
-
 kubectl config use-context k3s
 kubectl delete deployment nginx
+```
 
-🧠 What You Learned
+---
 
-You now understand:
-
-✔ What kubeconfig is
-✔ How to merge multiple kubeconfigs
-✔ How to switch between Minikube & K3s
-✔ How to view clusters, users, and contexts
-✔ How to set default namespaces per contex
+## 🎉 End of Lab
+You have learned how to manage multi-cluster kubeconfigs, switch contexts, and operate Minikube and K3s together.
