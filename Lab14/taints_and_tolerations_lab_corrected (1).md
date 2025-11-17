@@ -51,7 +51,7 @@ Taints: env=dev:NoSchedule
 
 ---
 
-# 3️⃣ Step 3 — Pod WITHOUT Toleration (Should Fail on Tainted Node)
+# 3️⃣ Step 3 — Pod WITHOUT Toleration
 
 Create file: **pod-no-toleration.yaml**
 
@@ -69,23 +69,13 @@ spec:
 Apply pod:
 
 ```bash
+cd ~/swift_training/Lab14
 kubectl apply -f pod-no-toleration.yaml
 kubectl get pod -o wide
 ```
 
 Expected behavior:
 - Pod **will NOT** schedule on `minikube-m02`
-- Pod schedules on another node or goes pending
-
-Check:
-```bash
-kubectl describe pod pod-no-toleration
-```
-
-Look for:
-```
-node(s) had taint {env: dev}, that the pod didn't tolerate
-```
 
 ---
 
@@ -117,7 +107,7 @@ kubectl get pod -o wide
 ```
 
 Expected:
-- Pod **CAN** run on `minikube-m02`
+- Pod **CAN** run on `minikube-m02` , but it may also run on different node.
 
 ---
 
@@ -141,7 +131,10 @@ env=dev:NoExecute
 
 Behavior:
 - Pods without toleration → **evicted immediately**
-- Pods with toleration → stay until tolerationSeconds
+
+```bash
+kubectl get pod
+```
 
 ---
 
@@ -160,7 +153,6 @@ spec:
       operator: "Equal"
       value: "dev"
       effect: "NoExecute"
-      tolerationSeconds: 20
   containers:
     - name: nginx
       image: nginx
@@ -173,13 +165,7 @@ kubectl apply -f pod-noexecute.yaml
 ```
 
 Expected:
-- Pod schedules on tainted node
-- After **20 seconds**, pod is **evicted**
-
-Check events:
-```bash
-kubectl describe pod pod-noexecute | grep -i evict
-```
+- Pod can schedule on any node including the tainted node
 
 ---
 
