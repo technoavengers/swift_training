@@ -8,10 +8,10 @@ This lab demonstrates how to create Roles, RoleBindings, set context to a user, 
 
 ```bash
 kubectl config get-contexts
-kubectl config use-context <admin-context>
+kubectl config use-context minikube
 ```
 
-Ensure you are using the cluster-admin context before modifying RBAC.
+Ensure you are using the minikube context which has admin permission before modifying RBAC.
 
 ---
 
@@ -121,10 +121,10 @@ kubectl get pod -n sample
 
 ```bash
 kubectl config get-contexts
-kubectl config use-context <admin-context>
+kubectl config use-context minikube
 ```
 
-Always return to admin context before creating new RBAC objects.
+Always return to minikube (admin) context before creating new RBAC objects.
 
 ---
 
