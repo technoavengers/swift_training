@@ -133,12 +133,6 @@ Expected: **no** (until RBAC is assigned)
 
 ---
 
-## Bonus: Manual Signing (kubeadm clusters only)
-
-```bash
-openssl x509 -req -in nav.csr   -CA /etc/kubernetes/pki/ca.crt   -CAkey /etc/kubernetes/pki/ca.key   -CAcreateserial   -out nav.crt   -days 20
-```
-
 ---
 
 ## Lab Completed
