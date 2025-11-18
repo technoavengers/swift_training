@@ -3,11 +3,18 @@
 ## Objective
 This lab teaches you how to create a Kubernetes user using certificates, CSR API, admin approval, and kubeconfig setup.
 
+## Step 1: Start Minikube
+
+```bash
+minikube start
+```
+
 ---
 
 ## Step 1: Generate a Private Key
 
 ```bash
+cd ~/swift_training/Lab18
 openssl genrsa -out nav.key 2048
 ```
 
@@ -99,11 +106,6 @@ Add user:
 kubectl config set-credentials nav --client-key=nav.key --client-certificate=nav.crt
 ```
 
-Or embed:
-
-```bash
-kubectl config set-credentials nav --client-key=nav.key --client-certificate=nav.crt --embed-certs
-```
 
 Check:
 
@@ -116,7 +118,7 @@ kubectl config view
 ## Step 7: Create/Use Context for New User
 
 ```bash
-kubectl config set-context nav --user=nav --cluster=technoavengers.k8s.local
+kubectl config set-context nav --user=nav --cluster=minikube
 kubectl config get-contexts
 kubectl config use-context nav
 ```
