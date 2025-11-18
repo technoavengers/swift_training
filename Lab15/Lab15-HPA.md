@@ -20,7 +20,7 @@ kubectl top nodes
 Check the deployment file, check out the resource section to see requested resources and what is limit on resources.
 
 ```bash
-cd ~/swift_training/Lab14
+cd ~/swift_training/Lab15
 kubectl apply -f deployment_with_resources.yaml
 ```
 
