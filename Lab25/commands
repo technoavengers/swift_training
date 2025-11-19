@@ -1,0 +1,2 @@
+oc expose service flask-service
+oc get routes
