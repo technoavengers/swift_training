@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: frontend
+  template:
+    metadata:
+      name: nodeapp-pod
+      labels:
+        type: frontend
+    spec:
+      containers:
+      - name: nodeapp-container
+        image: technoavengers/frontend:probes
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: app-configmap
+        # Liveness Probe → checks if app is alive
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 3
+
+        # Readiness Probe → checks DB connection & readiness
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          failureThreshold: 3
+
+        # Startup Probe → prevents app from being killed while booting
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          failureThreshold: 30   # app gets ~5 minutes to start
+          periodSeconds: 10

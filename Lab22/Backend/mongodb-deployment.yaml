@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: backend
+  template:
+    metadata:
+      name: mongodb-pod
+      labels:
+        type: backend
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:5.0
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - mountPath: /data/db
+          name: mongodb-volume
+
+        # ------------------------------------------------
+        # 🚀 Add Liveness, Readiness & Startup Probes
+        # ------------------------------------------------
+
+        # Liveness Probe: checks MongoDB is alive
+        livenessProbe:
+          exec:
+            command:
+              - mongosh
+              - --eval
+              - "db.adminCommand('ping')"
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        # Readiness Probe: pod ready only when DB is ready
+        readinessProbe:
+          exec:
+            command:
+              - mongosh
+              - --eval
+              - "db.adminCommand('ping')"
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        # Startup Probe: MongoDB may take 40–60 seconds to start
+        startupProbe:
+          exec:
+            command:
+              - mongosh
+              - --eval
+              - "db.adminCommand('ping')"
+          periodSeconds: 5
+          failureThreshold: 60   # 60 × 5 = 300s (5 minutes allowed)
+
+      volumes:
+      - name: mongodb-volume
+        persistentVolumeClaim:
+          claimName: mongo-pvc1
