@@ -1,0 +1,7 @@
+apiVersion: mycompany.com/v1
+kind: AppConfig
+metadata:
+  name: myapp-config
+spec:
+  appName: MyApp
+  replicas: 5
