@@ -32,7 +32,7 @@ clusters.
 Apply the operator manifest:
 
 ``` bash
-kubectl apply -f minio-operator.yaml
+kubectl apply -k "github.com/minio/operator?ref=v6.0.2"
 ```
 
 ------------------------------------------------------------------------
