@@ -4,4 +4,4 @@ metadata:
   name: myapp-config
 spec:
   appName: MyApp
-  replicas: 5
+  replicas: 3
