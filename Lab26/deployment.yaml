@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: nav220161-dev
+  name: ''
+  annotations:
+    deployment.kubernetes.io/revision: '4'
+    image.openshift.io/triggers: |
+      [
+        {
+          "from": {
+            "kind": "ImageStreamTag",
+            "name": "s2i-build:latest"
+          },
+          "fieldPath": "spec.template.spec.containers[0].image"
+        }
+      ]
+spec:
+  selector:
+    matchLabels:
+      app: name
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: name
+    spec:
+      containers:
+        - name: container
+          image: " "
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+
+  

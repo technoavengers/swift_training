@@ -1,0 +1,26 @@
+## Go to ImageStreams
+Create ImageStreams -> copy imagestream.yaml (make sure   namespace: nav220161-dev is replaced with your namespace) --> create imagestream
+
+
+## Go to BuidConfig
+
+Open BuildConfigs -> Create BuildConfig -> Copy build-config.yaml (Make sure you change the namespace with your namespace) -> Create
+
+## Check Build
+A build has triggered, check the status
+
+## Build Completes
+When build complete, check Imagestream, scoll down and check image is created
+
+## Create Deployement binded with ImageStream
+
+Workload >> Deployment >> Copy deployment.yaml (change namespace) > Create >> Check Pod status
+
+### Go to BuildConfig 
+Trigger a new build 
+
+## Build Completed
+When build completes, it will update the image
+
+## Check Deployment
+Pod must be restarted with new image
