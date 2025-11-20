@@ -1,7 +1,6 @@
 
 # MongoDB SecurityContext Comparison Lab  
 ### **Secure vs Insecure MongoDB Deployments**  
-Downloadable Lab Document
 
 ---
 
@@ -143,51 +142,24 @@ kubectl exec -it mongo-secure-pod -- id
 
 ### Run:
 ```
-kubectl exec -it mongo-secure-pod -- bash -c "id -u root"
+kubectl exec -it mongo-secure-pod -- bash 
+su
 ```
 
 | Deployment | Output | Meaning |
 |-----------|--------|---------|
 | insecure | Works | Container can impersonate root |
-| secure | Error / denied | Root access blocked |
+| secure  | will ask for password
 
 ---
 
-## ✅ **4.3 Test: fsGroup**
-
-### Run:
-```
-kubectl exec -it mongo-secure-pod -- ls -ld /data/db
-```
-
-| Deployment | Output | Meaning |
-|-----------|--------|---------|
-| insecure | Owned by root → may fail writing | PVC may block MongoDB |
-| secure | Owned by 999:999 | MongoDB gains write access |
-
----
-
-## ✅ **4.4 Test: Capability Dropping**
-
-### Run:
-```
-kubectl exec -it mongo-secure-pod -- capsh --print 2>/dev/null
-```
-
-| Deployment | Output |
-|-----------|---------|
-| insecure | MANY capabilities enabled |
-| secure | EMPTY bounding set |
-
-Meaning: secure pod cannot do privileged OS actions.
-
----
 
 ## ✅ **4.5 Test: allowPrivilegeEscalation**
 
 ### Run:
 ```
 kubectl exec -it mongo-secure-pod -- cat /proc/1/status | grep CapPrm
+kubectl exec -it mongo-insecure-pod -- cat /proc/1/status | grep CapPrm
 ```
 
 | Deployment | Output |
@@ -198,6 +170,18 @@ kubectl exec -it mongo-secure-pod -- cat /proc/1/status | grep CapPrm
 ---
 
 ## ✅ **4.6 Test: Seccomp (RuntimeDefault)**
+🎯 WHAT IS SECCOMP?
+
+SECCOMP = Secure Computing Mode
+It is a Linux kernel feature that:
+
+✔ Restricts which system calls a container can use
+✔ Prevents dangerous operations (e.g., mount, ptrace, reboot, setns, etc.)
+✔ Acts as a firewall for syscalls
+✔ Protects against container escape vulnerabilities
+
+It is one of the strongest security layers in containers.
+
 
 ### Run:
 ```
@@ -207,7 +191,7 @@ kubectl exec -it mongo-secure-pod -- cat /proc/1/status | grep Seccomp
 | Deployment | Output |
 |-----------|--------|
 | insecure | `Seccomp: 0` | No syscall filtering |
-| secure | `Seccomp: 2` | Syscall filtering active |
+| secure | `Seccomp: 2` | 🔒 Seccomp Filtering is fully enforced |
 
 ---
 
@@ -226,18 +210,6 @@ kubectl exec -it mongo-insecure-pod -- touch /testfile
 
 ---
 
-# 🏁 **5. Final Comparison Table**
-
-| Feature | Insecure Pod | Secure Pod | Purpose |
-|--------|--------------|------------|---------|
-| runAsUser | root | 999 | Prevent root access |
-| runAsGroup | root | 999 | Privilege isolation |
-| fsGroup | none | 999 | PVC read/write fix |
-| runAsNonRoot | No | Yes | Block root execution |
-| allowPrivilegeEscalation | Yes | No | Disable SUID privilege |
-| drop all capabilities | No | Yes | Remove OS privileges |
-| seccomp | off | on | Syscall filtering |
-| readOnlyRootFilesystem | No | Yes | Protect FS |
 
 ---
 
@@ -245,8 +217,5 @@ kubectl exec -it mongo-insecure-pod -- touch /testfile
 
 This lab clearly demonstrates the difference between **default insecure containers** vs **secure, production-ready workloads**.
 
----
 
-# 📁 **Download This File**
-The `.md` file is generated below.
 
