@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-secure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-secure
+  template:
+    metadata:
+      labels:
+        app: mongo-secure
+    spec:
+      securityContext:
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: mongo
+        image: mongo:5.0
+        ports:
+        - containerPort: 27017
+        securityContext:
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop:
+              - ALL
+        volumeMounts:
+          - mountPath: /data/db
+            name: db
+      volumes:
+      - name: db
+        emptyDir: {}

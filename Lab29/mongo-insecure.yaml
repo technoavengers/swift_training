@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-insecure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-insecure
+  template:
+    metadata:
+      labels:
+        app: mongo-insecure
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:5.0
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+          - mountPath: /data/db
+            name: db
+      volumes:
+      - name: db
+        emptyDir: {}

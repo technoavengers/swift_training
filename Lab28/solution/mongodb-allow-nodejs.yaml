@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-nodejs-to-mongodb
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      type: backend      # MongoDB pods
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              type: frontend     # Only NodeJS pods
+      ports:
+        - protocol: TCP
+          port: 27017            # MongoDB port
